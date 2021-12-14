@@ -12,21 +12,19 @@ S_train<-read.table("UCI HAR Dataset/train/subject_train.txt")
 #### Part 1 Merge the training and test sets ####
 Train<-cbind(S_train,Y_train,X_train)
 Test<-cbind(S_test,Y_test,X_test)
-
+Combdata<-rbind(Train,Test)
 
 
 #### Part 2 extract mean and SD for each measurement ####
 feature<-read.table("UCI HAR Dataset/features.txt")
 match<-feature[grepl("mean",feature[,2]) | grepl("std",feature[,2]),1]
-Trim_train<-Train[,c(1,2,(match+2))]
-Trim_test<-Test[,c(1,2,(match+2))]
+Trim_data<-Combdata[,c(1,2,(match+2))]
+
 
 #### Part 3 Use descriptive activity names to name the activites in the data set
 act<-read.table("UCI HAR Dataset/activity_labels.txt")
-Trim_test[,2]<-act[Trim_test[,2],2]
-Trim_train[,2]<-act[Trim_train[,2],2]
-Trim_test[,2]<-gsub("_","",Trim_test[,2])
-Trim_train[,2]<-gsub("_","",Trim_train[,2])
+Trim_data[,2]<-act[Trim_data[,2],2]
+Trim_data[,2]<-gsub("_","",Trim_data[,2])
 #### Part 4 label data set with descriptive variable names ####
 varname<-feature[match,2]
 remove<-c("\\(","\\)","-")
@@ -36,16 +34,12 @@ for (i in remove){
 varname<-gsub("^t","time",varname)
 varname<-gsub("^f","freq",varname)
 varname<-c("subjnum","activity",varname)
-colnames(Trim_test)<-varname
-colnames(Trim_train)<-varname
+colnames(Trim_data)<-varname
+
 
 #### Part 5 calculating average of data ####
 library(dplyr)
-Test_avg<-Trim_test %>%
-    group_by(subjnum,activity) %>%
-    summarise_all(mean) %>%
-    arrange(subjnum,activity)
-Train_avg<-Trim_train %>%
+Avg_data<-Trim_data %>%
     group_by(subjnum,activity) %>%
     summarise_all(mean) %>%
     arrange(subjnum,activity)
