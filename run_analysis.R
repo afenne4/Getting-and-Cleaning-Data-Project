@@ -25,3 +25,15 @@ Trim_test<-Test[,c(1,2,(match+2))]
 act<-read.table("UCI HAR Dataset/activity_labels.txt")
 Trim_test[,2]<-act[Trim_test[,2],2]
 Trim_train[,2]<-act[Trim_train[,2],2]
+
+#### Part 4 label data set with descriptive variable names ####
+varname<-feature[match,2]
+remove<-c("\\(","\\)","-")
+for (i in remove){
+    varname<-gsub(i,"",as.character(varname))
+}
+varname<-gsub("^t","time",varname)
+varname<-gsub("^f","freq",varname)
+varname<-c("subjnum","activity",varname)
+colnames(Trim_test)<-varname
+colnames(Trim_train)<-varname
