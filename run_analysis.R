@@ -17,7 +17,11 @@ Test<-cbind(S_test,Y_test,X_test)
 
 #### Part 2 extract mean and SD for each measurement ####
 feature<-read.table("UCI HAR Dataset/features.txt")
-
 match<-feature[grepl("mean",feature[,2]) | grepl("std",feature[,2]),1]
 Trim_train<-Train[,c(1,2,(match+2))]
 Trim_test<-Test[,c(1,2,(match+2))]
+
+#### Part 3 Use descriptive activity names to name the activites in the data set
+act<-read.table("UCI HAR Dataset/activity_labels.txt")
+Trim_test[,2]<-act[Trim_test[,2],2]
+Trim_train[,2]<-act[Trim_train[,2],2]
