@@ -25,7 +25,8 @@ Trim_test<-Test[,c(1,2,(match+2))]
 act<-read.table("UCI HAR Dataset/activity_labels.txt")
 Trim_test[,2]<-act[Trim_test[,2],2]
 Trim_train[,2]<-act[Trim_train[,2],2]
-
+Trim_test[,2]<-gsub("_","",Trim_test[,2])
+Trim_train[,2]<-gsub("_","",Trim_train[,2])
 #### Part 4 label data set with descriptive variable names ####
 varname<-feature[match,2]
 remove<-c("\\(","\\)","-")
@@ -37,3 +38,14 @@ varname<-gsub("^f","freq",varname)
 varname<-c("subjnum","activity",varname)
 colnames(Trim_test)<-varname
 colnames(Trim_train)<-varname
+
+#### Part 5 calculating average of data ####
+library(dplyr)
+Test_avg<-Trim_test %>%
+    group_by(subjnum,activity) %>%
+    summarise_all(mean) %>%
+    arrange(subjnum,activity)
+Train_avg<-Trim_train %>%
+    group_by(subjnum,activity) %>%
+    summarise_all(mean) %>%
+    arrange(subjnum,activity)
