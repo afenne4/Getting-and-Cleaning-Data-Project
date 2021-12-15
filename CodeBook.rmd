@@ -1,0 +1,38 @@
+---
+title: Coursera Getting and Cleaning Data Project
+author: Alex Fennell
+date: 12-15-2021
+output:
+  html_document:
+    keep_md: yes
+---
+
+## Project Description
+This project utilizes data about movement from a small group of participants
+
+## Study design and data processing
+30 participants had a smartphone attached to their waist, while they performed
+6 physical activities (Walking, Standing, etc.). Information from the
+accelerometer and gyroscope on the phone was collected. This data was filtered
+to reduce the influence of noise and to separate the signals into various 
+components of interest.
+
+
+### Raw data 
+Participant identification number, physical activity (Walking, Walking upstairs,
+Walking downstairs, Sitting, Standing, Laying), and a 561 feature vector with
+time and frequency domain variables. Details on this feature vector can be found
+in features_info.txt file. 
+
+## Processing data
+Filtered the data to only select columns that contain the means or standard
+deviations as specified by the variable name (see features.txt). Replaced numeric
+values corresponding to physical activity with character descriptors using the 
+activity_labels.txt file. Underscores were removed to make downstream analyses 
+simpler. Variable names were selected from the features.txt file and had non 
+alpha numeric characters removed. The t and f at the beggining of the
+variable names were expanded to time and freq respectively in an effort to be 
+more explicit about their meaning. The average was calculated for each subject
+in each condition across all the measured variables and written to a text file
+called Tidy_Data.txt.
+

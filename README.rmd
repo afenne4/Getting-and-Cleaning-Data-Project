@@ -1,0 +1,13 @@
+# Getting-and-Cleaning-Data-Project
+Course project for getting and cleaning data coursera course
+## Part 1 code
+The first section of code downloads the required documents from the url. An if 
+statement is included so that files do not get redownloaded if they are already
+present. The Train dataset is with the 571 feature vector is combined with the
+participant ID and the physical activity identifier. This dataframe is organized
+with participant ID in the first column, the physical activity identifier in the
+second column, and the feature vector in the subsequent columns. The same was
+done for the Test dataset. These were then combined using rbind to make one large
+dataset with data from all the participants.
+
+## Part 2 code

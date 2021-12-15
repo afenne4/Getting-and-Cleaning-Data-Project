@@ -14,17 +14,17 @@ Train<-cbind(S_train,Y_train,X_train)
 Test<-cbind(S_test,Y_test,X_test)
 Combdata<-rbind(Train,Test)
 
-
 #### Part 2 extract mean and SD for each measurement ####
 feature<-read.table("UCI HAR Dataset/features.txt")
 match<-feature[grepl("mean",feature[,2]) | grepl("std",feature[,2]),1]
+## Need to add 2 to the match vector since 2 columns were added to the dataset
 Trim_data<-Combdata[,c(1,2,(match+2))]
-
 
 #### Part 3 Use descriptive activity names to name the activites in the data set
 act<-read.table("UCI HAR Dataset/activity_labels.txt")
 Trim_data[,2]<-act[Trim_data[,2],2]
 Trim_data[,2]<-gsub("_","",Trim_data[,2])
+
 #### Part 4 label data set with descriptive variable names ####
 varname<-feature[match,2]
 remove<-c("\\(","\\)","-")
@@ -36,10 +36,11 @@ varname<-gsub("^f","freq",varname)
 varname<-c("subjnum","activity",varname)
 colnames(Trim_data)<-varname
 
-
 #### Part 5 calculating average of data ####
 library(dplyr)
 Avg_data<-Trim_data %>%
     group_by(subjnum,activity) %>%
     summarise_all(mean) %>%
     arrange(subjnum,activity)
+
+write.table(Avg_data,"Tidy_Data.txt")
