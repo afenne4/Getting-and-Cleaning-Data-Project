@@ -19,3 +19,9 @@ accordance with the logical vector. This trimmed data is then joined with the
 participant ID column and physical activity column
 
 ## Part 3 code
+The activity_labels.txt file is read in and is used to replace the numeric 
+representations for physical activities with strings. Underscores were removed 
+from the strings to eliminate an downstream errors caused by including non 
+alphanumeric characters.
+
+## Part 4 code
