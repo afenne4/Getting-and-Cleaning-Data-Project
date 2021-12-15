@@ -25,3 +25,19 @@ from the strings to eliminate an downstream errors caused by including non
 alphanumeric characters.
 
 ## Part 4 code
+This part used the feature labels selected from part 2. First a vector of characters
+to be removed was created. Then a loop was used in conjunction with the gsub 
+function to remove these characters. Following this, t and f were replaced with
+time and freq, using gsub, to make it more explicit that these variables corresponded
+to the time and frequency decompositions.
+
+## Part 5 code
+Using the dplyr package, the mean of the columns is calculated very easily. The
+groupby function selects how the data is to be combined for the calculation in 
+the subsequent summariseall step. In this case the data is to be averaged across
+participant ID and physical activity. The summariseall step then calculates the
+mean values for all of the columns. Finally arrange organizes the resulting 
+data in ascending order based on participant ID followed by physical activity.
+The result from this is stored in the Avg_Data variable which is then written to
+a text document called Tidy_data.txt
+participant ID and physical activity.
