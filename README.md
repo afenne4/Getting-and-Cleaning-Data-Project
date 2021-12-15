@@ -1,5 +1,5 @@
 # Getting-and-Cleaning-Data-Project
-
+All code for analysis is contained in 1 script, run_analysis.R
 ## Part 1 code
 The first section of code downloads the required documents from the url. An if 
 statement is included so that files do not get redownloaded if they are already
