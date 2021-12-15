@@ -11,3 +11,11 @@ done for the Test dataset. These were then combined using rbind to make one larg
 dataset with data from all the participants.
 
 ## Part 2 code
+The next section reads in the features.txt file which has all of the variable
+names for the gyroscope and accelerometer data. Using the grepl function, a logical
+vector of names that contain either mean or std is created. Using this, the 
+combined data from the previous step is filtered to only contain features in 
+accordance with the logical vector. This trimmed data is then joined with the 
+participant ID column and physical activity column
+
+## Part 3 code
