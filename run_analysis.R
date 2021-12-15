@@ -43,4 +43,4 @@ Avg_data<-Trim_data %>%
     summarise_all(mean) %>%
     arrange(subjnum,activity)
 
-write.table(Avg_data,"Tidy_Data.txt")
+write.table(Avg_data,"Tidy_Data.txt",row.names=FALSE)
